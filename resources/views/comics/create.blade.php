@@ -36,8 +36,8 @@
                 <input type="text" class="form-control" id="type" name="type" placeholder="Inserisci il tipo..."  maxlength="50" >
             </div>
               <div class="mb-3">
-                <label for="artist" class="form-label">Artista/i: <span class="text-danger">*</span> </label>
-                <input type="text" class="form-control" id="artist" name="artist" placeholder="Inserisci Artista/i..."  maxlength="500" required>
+                <label for="artists" class="form-label">Artista/i: <span class="text-danger">*</span> </label>
+                <input type="text" class="form-control" id="artists" name="artists" placeholder="Inserisci Artista/i..."  maxlength="500" required>
             </div>
               <div class="mb-3">
                 <label for="writers" class="form-label">Scrittore/i: <span class="text-danger">*</span> </label>

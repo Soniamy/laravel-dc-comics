@@ -20,7 +20,9 @@
                         <p class="card-text"><strong>Scrittore/i:</strong> {{ $comic->writers}}</p>
                     </div>
             </div>
-           
+           <div class="mb-4">
+       <a href="{{route('comics.index')}}" class="btn btn-primary w-100 fs-5"> Home Comics</a>
+     </div>
         </div>
        
     </div>

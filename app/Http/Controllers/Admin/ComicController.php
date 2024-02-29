@@ -29,8 +29,21 @@ class ComicController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
+     {
+        $comicData = $request->all();
+         $comic = new Comic();
+            $comic->title = $comicData['title'];
+            $comic->description = $comicData['description'];
+            $comic->thumb = $comicData['src'];
+            $replacePrice = str_replace('$', '', $comicData['price']);
+            $comic->price = intval($replacePrice);
+            $comic->series = $comicData['series'];
+            $comic->sale_date = $comicData['sale_date'];
+            $comic->type = $comicData['type'];
+            $comic->artists = $comicData['artists'];
+            $comic->writers =$comicData['writers'];
+            $comic->save();
+            return redirect()->route('comics.show',['comic' => $comic->id]);
     }
 
     /**
