@@ -3,16 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Database\Seeders\ComicsSeeder;
 use Illuminate\Http\Request;
+use App\Models\Comic;
 
 class ComicController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
+    public function index(){
+        $comics = Comic::all();
+            return view('comics.index',compact('comics'));
     }
 
     /**
@@ -36,7 +38,8 @@ class ComicController extends Controller
      */
     public function show(string $id)
     {
-        //
+         $comic = Comic::find($id);
+            return view('comics.show',compact('comic'));
     }
 
     /**
