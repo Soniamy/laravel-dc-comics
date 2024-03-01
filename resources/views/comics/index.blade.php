@@ -23,7 +23,7 @@
                         <p class="card-text"><strong>Scrittore/i:</strong> {{ $comic->writers}}</p>
                         <a href="{{route('comics.show',['comic' => $comic->id])}}" class="btn btn-primary">Go to Comic</a>
                         <a href="{{route('comics.edit',['comic' => $comic->id])}}" class="btn btn-warning">Edit Comic</a>
-                        <form class="d-inline-block" action="{{route('comics.destroy',['comic' => $comic->id])}}" method="POST">
+                        <form onsubmit="return confirm('Vuoi eliminare il Comic?');" class="d-inline-block" action="{{route('comics.destroy',['comic' => $comic->id])}}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger ">Elimina </button>
