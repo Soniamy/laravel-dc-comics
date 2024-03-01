@@ -58,23 +58,38 @@ class ComicController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Comic $comic)
     {
-        //
+        return view('comics.edit',compact('comic'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
+    public function update(Request $request, Comic $comic)
+
+    {     
+            $comicData = $request->all();
+            $comic->title = $comicData['title'];
+            $comic->description = $comicData['description'];
+            $comic->thumb = $comicData['src'];
+            $replacePrice = str_replace('$', '', $comicData['price']);
+            $comic->price = intval($replacePrice);
+            $comic->series = $comicData['series'];
+            $comic->sale_date = $comicData['sale_date'];
+            $comic->type = $comicData['type'];
+            $comic->artists = $comicData['artists'];
+            $comic->writers =$comicData['writers'];
+            $comic->save();
+            return redirect()->route('comics.show',['comic' => $comic->id]);
+         
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id )
+      
     {
         //
     }
