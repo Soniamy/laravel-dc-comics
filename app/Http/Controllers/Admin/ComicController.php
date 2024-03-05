@@ -42,6 +42,9 @@ class ComicController extends Controller
             'type'              => 'nullable|string',
             'artists'           => 'nullable|string',
             'writers'           => 'nullable|string',
+        ],[
+            'title.required' => 'MESSAGGIO CUSTOM TITLE REQUIRED',
+            'title.max' => 'MESSAGGIO CUSTOM TITLE MAX',
         ]);
 
             $comic = new Comic();
