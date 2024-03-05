@@ -44,7 +44,6 @@ class ComicController extends Controller
             'writers'           => 'nullable|string',
         ]);
 
-            $validatedData = $request->all();
             $comic = new Comic();
             $comic->title =$validatedData['title'];
             $comic->description =$validatedData['description'];
@@ -94,8 +93,6 @@ class ComicController extends Controller
             'artists'           => 'nullable|string',
             'writers'           => 'nullable|string',
         ]);
-        dd($validatedData);
-            $validatedData = $request->all();
             $comic->title =  $validatedData ['title'];
             $comic->description =  $validatedData ['description'];
             $comic->thumb =  $validatedData ['src'];
