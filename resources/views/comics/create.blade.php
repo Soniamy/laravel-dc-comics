@@ -5,6 +5,15 @@
 @section('main-content')
  <h1 class="text-center">Comics Create</h1>
     <div class="col">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
        <form action="{{route('comics.store')}}" method="POST">
         @csrf
             <div class="mb-3">

@@ -7,6 +7,7 @@ use Database\Seeders\ComicsSeeder;
 use Illuminate\Http\Request;
 use App\Models\Comic;
 
+
 class ComicController extends Controller
 {
     /**
@@ -23,6 +24,7 @@ class ComicController extends Controller
     public function create()
     {
       return view('comics.create');
+
     }
 
     /**
@@ -30,18 +32,30 @@ class ComicController extends Controller
      */
     public function store(Request $request)
      {
-        $comicData = $request->all();
-         $comic = new Comic();
-            $comic->title = $comicData['title'];
-            $comic->description = $comicData['description'];
-            $comic->thumb = $comicData['src'];
-            $replacePrice = str_replace('$', '', $comicData['price']);
+        $validatedData = $request->validate([
+            'src'               => 'nullable|max:1024|url',
+            'title'             => 'required|max:150',
+            'description'       => 'nullable|max:4096',
+            'price'             => 'required|numeric',
+            'series'            => 'nullable|string',
+            'sale_date'         => 'required|date',
+            'type'              => 'nullable|string',
+            'artists'           => 'nullable|string',
+            'writers'           => 'nullable|string',
+        ]);
+
+            $validatedData = $request->all();
+            $comic = new Comic();
+            $comic->title =$validatedData['title'];
+            $comic->description =$validatedData['description'];
+            $comic->thumb =$validatedData['src'];
+            $replacePrice = str_replace('$', '',$validatedData['price']);
             $comic->price = intval($replacePrice);
-            $comic->series = $comicData['series'];
-            $comic->sale_date = $comicData['sale_date'];
-            $comic->type = $comicData['type'];
-            $comic->artists = $comicData['artists'];
-            $comic->writers =$comicData['writers'];
+            $comic->series =$validatedData['series'];
+            $comic->sale_date =$validatedData['sale_date'];
+            $comic->type =$validatedData['type'];
+            $comic->artists =$validatedData['artists'];
+            $comic->writers =$validatedData['writers'];
             $comic->save();
             return redirect()->route('comics.show',['comic' => $comic->id]);
     }
@@ -69,17 +83,29 @@ class ComicController extends Controller
     public function update(Request $request, Comic $comic)
 
     {     
-            $comicData = $request->all();
-            $comic->title = $comicData['title'];
-            $comic->description = $comicData['description'];
-            $comic->thumb = $comicData['src'];
-            $replacePrice = str_replace('$', '', $comicData['price']);
+         $validatedData = $request->validate([
+            'src'               => 'nullable|max:1024|url',
+            'title'             => 'required|max:150',
+            'description'       => 'nullable|max:4096',
+            'price'             => 'required|numeric',
+            'series'            => 'nullable|string',
+            'sale_date'         => 'required|date',
+            'type'              => 'nullable|string',
+            'artists'           => 'nullable|string',
+            'writers'           => 'nullable|string',
+        ]);
+        dd($validatedData);
+            $validatedData = $request->all();
+            $comic->title =  $validatedData ['title'];
+            $comic->description =  $validatedData ['description'];
+            $comic->thumb =  $validatedData ['src'];
+            $replacePrice = str_replace('$', '',  $validatedData ['price']);
             $comic->price = intval($replacePrice);
-            $comic->series = $comicData['series'];
-            $comic->sale_date = $comicData['sale_date'];
-            $comic->type = $comicData['type'];
-            $comic->artists = $comicData['artists'];
-            $comic->writers =$comicData['writers'];
+            $comic->series =  $validatedData ['series'];
+            $comic->sale_date =  $validatedData ['sale_date'];
+            $comic->type =  $validatedData ['type'];
+            $comic->artists =  $validatedData ['artists'];
+            $comic->writers = $validatedData ['writers'];
             $comic->save();
             return redirect()->route('comics.show',['comic' => $comic->id]);
          
